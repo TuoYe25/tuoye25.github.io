@@ -213,6 +213,10 @@
       playing = on;
       if (on) fab.classList.add('is-playing');
       else fab.classList.remove('is-playing');
+      if (stopBtn) {
+        stopBtn.textContent = on ? '⏹' : '▶';
+        stopBtn.title = on ? '停止' : '从头播放';
+      }
     }
 
     function clearEndTimer() {
@@ -303,10 +307,6 @@
         return;
       }
       panel.classList.toggle('show');
-      // resuming after stop
-      if (panel.classList.contains('show') && !playing && songs.length) {
-        playAt(pos);
-      }
     });
 
     if (prevBtn) prevBtn.addEventListener('click', function () {
@@ -315,7 +315,11 @@
     if (nextBtn) nextBtn.addEventListener('click', function () {
       if (songs.length) playAt(pos + 1);
     });
-    if (stopBtn) stopBtn.addEventListener('click', stop);
+    if (stopBtn) stopBtn.addEventListener('click', function () {
+      // toggle: stop current track, or replay the current track from the start
+      if (playing) stop();
+      else if (songs.length) playAt(pos);
+    });
 
     // Browsers block autoplay before first interaction: start on first gesture
     function armGestureAutostart() {
