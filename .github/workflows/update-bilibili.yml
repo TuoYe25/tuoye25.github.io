@@ -1,0 +1,40 @@
+name: Bilibili Fav Playlist Sync
+
+on:
+  schedule:
+    # 每天北京时间 09:07 (UTC 01:07) 运行
+    - cron: '7 1 * * *'
+  workflow_dispatch:
+  push:
+    branches: [gh-pages]
+    paths:
+      - '.github/workflows/update-bilibili.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-bilibili:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Bilibili favorites
+        id: sync
+        env:
+          BILIBILI_FID: ${{ vars.BILIBILI_FID || '4207040106' }}
+        run: |
+          node .github/scripts/update-bilibili.js
+
+      - name: Commit and Push
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'assets/json/bilibili.js'
+          message: "Update Bilibili playlist (${{ steps.sync.outputs.count }} tracks)"
+          github_token: ${{ secrets.GH_TOKEN || github.token }}

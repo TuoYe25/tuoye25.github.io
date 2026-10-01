@@ -10,39 +10,137 @@
     <meta name="keywords" content="Edwin,Homepage">
     <meta name="author" content="Edwin">
     <title>Edwin Home</title>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/dmego-home-page@latest/assets/css/onlinewebfonts.css"/>
+    <link rel="stylesheet" type="text/css" href="./assets/css/onlinewebfonts.css"/>
     <link rel="stylesheet" type="text/css" href="./assets/css/vno.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_5130334_p6zo5vrlr9n.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/dmego-home-page@latest/assets/css/wakatime-theme.css">
-    <link rel="apple-touch-icon" href="https://unpkg.com/dmego-home-page@latest/apple-touch-icon.png">
-    <link rel="icon" href="https://unpkg.com/dmego-home-page@latest/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./assets/css/wakatime-theme.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/widgets.css">
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+    <link rel="icon" href="./favicon.ico">
     <style>
-        /* Clock with custom images */
-        .clock-container {
-            position: relative;
-            width: 100%;
-            padding-top: 100%; /* 1:1 Aspect Ratio */
-            background: radial-gradient(circle at center, #ffffff, #f0f0f0);
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .clock-face {
+        /* ===== Pocket watch clock ===== */
+        .pocket-watch {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+        }
+
+        /* 吊环 bow */
+        .pocket-bow {
+            position: absolute;
+            top: -21%;
+            left: 50%;
+            width: 30%;
+            height: auto;
+            transform: translateX(-50%);
+            z-index: 1;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+        }
+
+        /* 表冠 crown */
+        .pocket-crown {
+            position: absolute;
+            top: 1.5%;
+            left: 50%;
+            width: 11%;
+            height: 7%;
+            transform: translateX(-50%);
+            border-radius: 3px 3px 2px 2px;
+            background: linear-gradient(to bottom,
+                #f6f9ff 0%, #cfdcf1 28%, #819ac9 55%,
+                #3a4c7d 68%, #6f8abf 88%, #e3ecfa 100%);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.35),
+                        inset 0 1px 1px rgba(255,255,255,0.8);
+            z-index: 3;
+        }
+
+        .pocket-crown::before,
+        .pocket-crown::after {
+            content: "";
+            position: absolute;
+            left: 16%;
+            right: 16%;
+            height: 1px;
+            background: rgba(28,38,72,0.7);
+        }
+
+        .pocket-crown::before { top: 38%; }
+        .pocket-crown::after  { top: 62%; }
+
+        /* 表壳 case — blued steel */
+        .watch-case {
+            position: absolute;
+            inset: 3.5%;
             border-radius: 50%;
-            /* Use custom dial image */
+            background:
+                /* specular bands sweeping around the polished ring */
+                conic-gradient(from 200deg,
+                    rgba(255,255,255,0)    0deg,
+                    rgba(244,248,255,0.78) 28deg,
+                    rgba(46,62,110,0.52)  68deg,
+                    rgba(255,255,255,0)    115deg,
+                    rgba(244,248,255,0.58) 165deg,
+                    rgba(36,50,96,0.58)   225deg,
+                    rgba(255,255,255,0)    280deg,
+                    rgba(244,248,255,0.68) 325deg,
+                    rgba(255,255,255,0)    360deg),
+                radial-gradient(120% 120% at 30% 24%,
+                    #f6f9ff 0%, #d7e2f4 12%, #a8bcde 30%,
+                    #7590c2 50%, #3c5085 64%, #5d78ae 76%,
+                    #d0ddf1 90%, #4d6299 100%);
+            box-shadow: 0 7px 16px rgba(12,20,45,0.45),
+                        inset 0 2px 3px rgba(255,255,255,0.95),
+                        inset 0 -6px 10px rgba(16,26,58,0.5),
+                        inset 4px 0 8px rgba(255,255,255,0.35),
+                        inset -4px 0 8px rgba(16,26,58,0.4);
+            z-index: 2;
+        }
+
+        /* engraved groove inside the case */
+        .watch-case::after {
+            content: "";
+            position: absolute;
+            inset: 7.5%;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6),
+                        inset 0 1px 2px rgba(0,0,0,0.25);
+        }
+
+        .clock-face {
+            position: absolute;
+            inset: 12%;
+            border-radius: 50%;
+            /* dial image is transparent line art — supply the white enamel base */
+            background-color: #ffffff;
             background-image: url('assets/img/clock/clock.png');
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 0 0 1.5px #465a8c,
+                        inset 0 2px 5px rgba(20,30,60,0.22),
+                        inset 0 -2px 4px rgba(255,255,255,0.85);
         }
-        
+
         /* Hide default numbers since they're included in the dial image */
         .clock-number {
             display: none;
+        }
+
+        /* convex glass reflection */
+        .clock-glass {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 15;
+            background:
+                radial-gradient(ellipse 62% 40% at 30% 18%,
+                    rgba(255,255,255,0.5), rgba(255,255,255,0) 70%),
+                linear-gradient(135deg,
+                    rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 38%,
+                    rgba(255,255,255,0) 70%, rgba(255,255,255,0.12) 100%);
         }
         
         .clock-hand {
@@ -96,18 +194,101 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 12px;
-            height: 12px;
-            background: #333;
+            width: 11px;
+            height: 11px;
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            /* Ensure center is visible above hands */
+            background: radial-gradient(circle at 35% 30%,
+                #f6f9ff, #9ab1d9 55%, #364a82);
+            box-shadow: 0 1px 2px rgba(10,18,42,0.45),
+                        inset 0 0 0 1px rgba(34,46,86,0.65);
+            /* Ensure center is visible above hands and glass */
             z-index: 20;
+        }
+
+        .clock-center::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            background: #1f2d58;
+        }
+
+        /* ===== Back case (flipped "Be Brave" side) ===== */
+        .ih-item.circle.effect .info .info-back {
+            position: absolute;
+            inset: 3.5%;
+            width: auto;
+            height: auto;
+            border-radius: 50%;
+            opacity: 1;
+            /* same blued steel as the front case */
+            background:
+                conic-gradient(from 200deg,
+                    rgba(255,255,255,0)    0deg,
+                    rgba(244,248,255,0.78) 28deg,
+                    rgba(46,62,110,0.52)  68deg,
+                    rgba(255,255,255,0)    115deg,
+                    rgba(244,248,255,0.58) 165deg,
+                    rgba(36,50,96,0.58)   225deg,
+                    rgba(255,255,255,0)    280deg,
+                    rgba(244,248,255,0.68) 325deg,
+                    rgba(255,255,255,0)    360deg),
+                radial-gradient(120% 120% at 30% 24%,
+                    #f6f9ff 0%, #d7e2f4 12%, #a8bcde 30%,
+                    #7590c2 50%, #3c5085 64%, #5d78ae 76%,
+                    #d0ddf1 90%, #4d6299 100%);
+            box-shadow: 0 7px 16px rgba(12,20,45,0.45),
+                        inset 0 2px 3px rgba(255,255,255,0.95),
+                        inset 0 -6px 10px rgba(16,26,58,0.5),
+                        inset 4px 0 8px rgba(255,255,255,0.35),
+                        inset -4px 0 8px rgba(16,26,58,0.4);
+        }
+
+        /* engraved inner nameplate */
+        .info-back-plate {
+            position: absolute;
+            inset: 12%;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            background: radial-gradient(circle at 35% 30%,
+                #2f3d63, #1a2442 72%, #0e1528 100%);
+            box-shadow: 0 0 0 1px #465a8c,
+                        inset 0 0 0 1px rgba(232,240,255,0.28),
+                        inset 0 2px 6px rgba(0,0,0,0.65),
+                        inset 0 -2px 4px rgba(180,205,255,0.1);
+        }
+
+        .ih-item.circle.effect .info .info-back h2 {
+            margin: 0;
+            padding-top: 0;
+            height: auto;
+            font-size: 14px;
+        }
+
+        .ih-item.circle.effect .info .info-back p {
+            margin: 0;
+            padding: 0;
+            font-size: 8.5px;
+        }
+
+        @media all and (max-width:780px) {
+            .ih-item.circle.effect .info .info-back h2 { font-size: 11px; }
+            .ih-item.circle.effect .info .info-back p  { font-size: 7px; }
         }
     </style>
 </head>
 
-<body>
+<body
+    data-weather-city="Shanghai">
     <span class="mobile btn-mobile-menu">
         <i class="social iconfont icon-list btn-mobile-menu__icon"></i>
         <i class="social iconfont icon-up btn-mobile-close__icon hidden"></i>
@@ -119,44 +300,60 @@
                     <div class="ih-item circle effect right_to_left">            
                         <a href="#" title="" class="blog-button">
                             <div class="img">
-                                <div class="clock-container" id="clockContainer">
-                                    <div class="clock-face">
-                                        <!-- Clock Numbers -->
-                                        <div class="clock-number" style="transform: rotate(0deg);"><span>12</span></div>
-                                        <div class="clock-number" style="transform: rotate(30deg);"><span>1</span></div>
-                                        <div class="clock-number" style="transform: rotate(60deg);"><span>2</span></div>
-                                        <div class="clock-number" style="transform: rotate(90deg);"><span>3</span></div>
-                                        <div class="clock-number" style="transform: rotate(120deg);"><span>4</span></div>
-                                        <div class="clock-number" style="transform: rotate(150deg);"><span>5</span></div>
-                                        <div class="clock-number" style="transform: rotate(180deg);"><span>6</span></div>
-                                        <div class="clock-number" style="transform: rotate(210deg);"><span>7</span></div>
-                                        <div class="clock-number" style="transform: rotate(240deg);"><span>8</span></div>
-                                        <div class="clock-number" style="transform: rotate(270deg);"><span>9</span></div>
-                                        <div class="clock-number" style="transform: rotate(300deg);"><span>10</span></div>
-                                        <div class="clock-number" style="transform: rotate(330deg);"><span>11</span></div>
-                                        
-                                        <!-- Clock Hands -->
-                                        <div class="clock-hand hour-hand" id="hourHand"></div>
-                                        <div class="clock-hand minute-hand" id="minuteHand"></div>
-                                        <div class="clock-hand second-hand" id="secondHand"></div>
-                                        
-                                        <!-- Clock Center -->
-                                        <div class="clock-center"></div>
+                                <div class="pocket-watch" id="clockContainer">
+                                    <!-- 吊环 bow -->
+                                    <svg class="pocket-bow" viewBox="0 4 32 31" aria-hidden="true">
+                                        <defs>
+                                            <linearGradient id="bowMetal" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#f6f9ff"/>
+                                                <stop offset="45%" stop-color="#a5bce0"/>
+                                                <stop offset="75%" stop-color="#3a4c7d"/>
+                                                <stop offset="100%" stop-color="#b6c9e8"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M8 28 A8 8 0 1 1 24 28"
+                                              fill="none" stroke="url(#bowMetal)"
+                                              stroke-width="5" stroke-linecap="round"/>
+                                    </svg>
+                                    <!-- 表冠 crown -->
+                                    <div class="pocket-crown"></div>
+                                    <!-- 表壳 case -->
+                                    <div class="watch-case">
+                                        <div class="clock-face">
+                                            <!-- Clock Numbers -->
+                                            <div class="clock-number" style="transform: rotate(0deg);"><span>12</span></div>
+                                            <div class="clock-number" style="transform: rotate(30deg);"><span>1</span></div>
+                                            <div class="clock-number" style="transform: rotate(60deg);"><span>2</span></div>
+                                            <div class="clock-number" style="transform: rotate(90deg);"><span>3</span></div>
+                                            <div class="clock-number" style="transform: rotate(120deg);"><span>4</span></div>
+                                            <div class="clock-number" style="transform: rotate(150deg);"><span>5</span></div>
+                                            <div class="clock-number" style="transform: rotate(180deg);"><span>6</span></div>
+                                            <div class="clock-number" style="transform: rotate(210deg);"><span>7</span></div>
+                                            <div class="clock-number" style="transform: rotate(240deg);"><span>8</span></div>
+                                            <div class="clock-number" style="transform: rotate(270deg);"><span>9</span></div>
+                                            <div class="clock-number" style="transform: rotate(300deg);"><span>10</span></div>
+                                            <div class="clock-number" style="transform: rotate(330deg);"><span>11</span></div>
+                                            
+                                            <!-- Clock Hands -->
+                                            <div class="clock-hand hour-hand" id="hourHand"></div>
+                                            <div class="clock-hand minute-hand" id="minuteHand"></div>
+                                            <div class="clock-hand second-hand" id="secondHand"></div>
+                                            
+                                            <!-- Convex glass -->
+                                            <div class="clock-glass"></div>
+                                            
+                                            <!-- Clock Center -->
+                                            <div class="clock-center"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="info iUp">
                                 <div class="info-back">
-                                    <h2> 
-                                        
-                                            Be Brave
-                                        
-                                    </h2>
-                                    <p>
-                                        
-                                            2026 · 沉淀
-                                        
-                                    </p>
+                                    <div class="info-back-plate">
+                                        <h2>Be Brave</h2>
+                                        <p>2026 · 沉淀</p>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -243,8 +440,51 @@
     <div id="wechatModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;" onclick="closeWeChatModal()">
         <img src="./assets/img/wechat.jpg" alt="WeChat" style="max-width: 300px; max-height: 300px; border-radius: 10px;" onclick="event.stopPropagation()">
     </div>
-    <script type="text/javascript" src="https://unpkg.com/dmego-home-page@latest/assets/js/main.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/dmego-home-page@latest/assets/js/theme-loader.js"></script>
+    <!-- Weather: fixed top-left corner (compact, geolocation-aware) -->
+    <div class="weather-fixed widget-card" id="weather-card">
+        <div class="widget-title">
+            <span class="dot"></span>天气
+            <button id="weather-locate" class="weather-locate-btn" title="定位到我的位置">📍</button>
+        </div>
+        <div id="weather-body">
+            <div class="weather-loading">加载中…</div>
+        </div>
+    </div>
+    <!-- Visitor map: bare image, fixed top-right corner -->
+    <a class="flag-fixed" href="https://info.flagcounter.com/pyY8" target="_blank" title="访客地图">
+        <img src="https://s01.flagcounter.com/map/pyY8/size_t/txt_000000/border_CCCCCC/pageviews_1/viewers_0/flags_0/" alt="Flag Counter" border="0">
+    </a>
+    <!-- Music: floating button (bottom-left) + popup Bilibili player -->
+    <div id="music-panel" class="music-panel">
+        <div class="music-panel-inner">
+            <div class="bili-bar">
+                <img id="bili-cover" class="bili-cover" src="" alt="" style="visibility:hidden;">
+                <div class="bili-meta">
+                    <div id="bili-title" class="bili-title">—</div>
+                    <div id="bili-artist" class="bili-artist">bilibili</div>
+                </div>
+                <a id="bili-link" href="https://www.bilibili.com" target="_blank" title="在 B 站打开">↗</a>
+            </div>
+            <div class="bili-video">
+                <iframe id="bili-frame" src="about:blank" scrolling="no" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="bili-controls">
+                <button id="bili-prev" type="button" title="上一首">⏮</button>
+                <button id="bili-stop" type="button" title="停止">⏹</button>
+                <button id="bili-next" type="button" title="下一首">⏭</button>
+                <span class="bili-hint">B 站收藏夹 · 随机</span>
+            </div>
+        </div>
+    </div>
+    <button id="music-fab" class="music-fab" type="button" title="B站收藏夹随机播放">
+        <span class="music-icon">🎵</span>
+        <span class="music-eq"><span></span><span></span><span></span><span></span></span>
+        <span class="music-label">音乐</span>
+    </button>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/theme-loader.js"></script>
+    <script type="text/javascript" src="./assets/json/bilibili.js"></script>
+    <script type="text/javascript" src="./assets/js/widgets.js"></script>
     
     <script type="text/javascript">
         // Clock functionality to display local time

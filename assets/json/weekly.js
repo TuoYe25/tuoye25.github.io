@@ -1,56 +1,56 @@
 window.WAKATIME_WEEKLY = {
-  "updated_at": "2026-03-12T02:51:35.238Z",
+  "updated_at": "2026-10-01T00:00:00.000Z",
   "stats": {
-    "total_hours": 33.87,
-    "daily_avg": 4.84,
+    "total_hours": 0,
+    "daily_avg": 0,
     "trend": "falling",
     "max_day": {
-      "date": "2026-03-08",
-      "hours": 7.95,
-      "text": "7 hrs 57 mins"
+      "date": "2026-10-01",
+      "hours": 0,
+      "text": "0 secs"
     }
   },
   "days": [
     {
-      "date": "2026-03-06",
-      "hours": 2.76,
-      "text": "2 hrs 45 mins"
+      "date": "2026-09-25",
+      "hours": 0,
+      "text": "0 secs"
     },
     {
-      "date": "2026-03-07",
-      "hours": 6.4,
-      "text": "6 hrs 24 mins"
+      "date": "2026-09-26",
+      "hours": 0,
+      "text": "0 secs"
     },
     {
-      "date": "2026-03-08",
-      "hours": 7.95,
-      "text": "7 hrs 57 mins"
+      "date": "2026-09-27",
+      "hours": 0,
+      "text": "0 secs"
     },
     {
-      "date": "2026-03-09",
-      "hours": 4.81,
-      "text": "4 hrs 48 mins"
+      "date": "2026-09-28",
+      "hours": 0,
+      "text": "0 secs"
     },
     {
-      "date": "2026-03-10",
-      "hours": 6.01,
-      "text": "6 hrs"
+      "date": "2026-09-29",
+      "hours": 0,
+      "text": "0 secs"
     },
     {
-      "date": "2026-03-11",
-      "hours": 5.94,
-      "text": "5 hrs 56 mins"
+      "date": "2026-09-30",
+      "hours": 0,
+      "text": "0 secs"
     },
     {
-      "date": "2026-03-12",
+      "date": "2026-10-01",
       "hours": 0,
       "text": "0 secs"
     }
   ],
   "ai": {
-    "title": "能量衰减",
-    "quote": "代码像电池，越用越少，巅峰只是短暂的闪烁。",
-    "tarot": "🔋 The Hermit",
-    "theme_color": "#00FFF7"
+    "title": "等待激活",
+    "quote": "配置 WakaTime 后，这里会显示你本周的编码能量报告。",
+    "tarot": "🌙 The Moon (等待)",
+    "theme_color": "#1a1a2e"
   }
 };
