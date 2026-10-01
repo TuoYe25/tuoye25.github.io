@@ -61,7 +61,7 @@ function getBingImages(imgUrls) {
 	}
 	
 	// Use backgroundImage property with proper escaping to prevent CSS injection
-	var url = "https://www.cn.bing.com" + imgUrl;
+	var url = "https://cn.bing.com" + imgUrl;
 	panel.style.backgroundImage = "url('" + url.replace(/['\\]/g, '\\$&') + "')";
 	panel.style.backgroundPosition = "center center";
 	panel.style.backgroundRepeat = "no-repeat";
