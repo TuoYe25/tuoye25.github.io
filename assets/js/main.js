@@ -1,6 +1,6 @@
 var iUp = (function () {
 	var time = 0,
-		duration = 150,
+		duration = 60,
 		clean = function () {
 			time = 0;
 		},

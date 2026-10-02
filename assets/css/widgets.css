@@ -21,7 +21,10 @@
   top: 18px;
   left: 18px;
   z-index: 950;
-  width: 264px;
+  /* shrink-wrap: exactly wide enough for the three chips in one row */
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: calc(100vw - 36px);
 }
 
 .widget-title {
@@ -91,7 +94,7 @@
 
 .weather-chips {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   margin-top: 8px;
   padding-top: 7px;
@@ -351,8 +354,8 @@
   .weather-fixed {
     top: 10px;
     left: 10px;
-    width: 148px;
     padding: 8px 10px;
+    max-width: calc(100vw - 20px);
   }
 
   .weather-emoji { font-size: 22px; }

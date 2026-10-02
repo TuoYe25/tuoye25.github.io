@@ -7945,9 +7945,9 @@ hr {
     -ms-transform: translate3d(0, 80px, 0);
     -o-transform: translate3d(0, 80px, 0);
     transform: translate3d(0, 80px, 0);
-    -webkit-transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
-    -moz-transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 2s cubic-bezier(0.19, 1, 0.22, 1)
+    -webkit-transition: all .8s cubic-bezier(0.19, 1, 0.22, 1);
+    -moz-transition: all .8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all .8s cubic-bezier(0.19, 1, 0.22, 1)
 }
 
 .iUp.up {
@@ -8400,6 +8400,54 @@ i {
     .navigation__item a {
         display: block;
         margin-bottom: .4em
+    }
+}
+
+/* ===== Boot reveal choreography =====
+   Main profile text/links use .iUp (starts immediately on DOMContentLoaded).
+   Peripheral elements stay hidden and fade in afterwards so that the name
+   and important links are painted first. */
+@keyframes bootFadeUp {
+    0% { opacity: 0; transform: translateY(12px); visibility: hidden; }
+    100% { opacity: 1; visibility: visible; }
+}
+
+/* pocket watch avatar (stage 1) */
+.ih-item.circle.effect {
+    -webkit-animation: bootFadeUp .7s cubic-bezier(0.19, 1, 0.22, 1) .45s both;
+    animation: bootFadeUp .7s cubic-bezier(0.19, 1, 0.22, 1) .45s both;
+}
+
+/* weather card + visitor map (stage 2) */
+.weather-fixed,
+.flag-fixed {
+    -webkit-animation: bootFadeUp .6s ease .9s both;
+    animation: bootFadeUp .6s ease .9s both;
+}
+
+/* music floating button (stage 3) */
+#music-fab {
+    -webkit-animation: bootFadeUp .6s ease 1.05s both;
+    animation: bootFadeUp .6s ease 1.05s both;
+}
+
+/* wakatime status is created dynamically after config fetch;
+   fade it in shortly after it gets inserted */
+#wakatime-status {
+    -webkit-animation: bootFadeUp .6s ease .2s both;
+    animation: bootFadeUp .6s ease .2s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ih-item.circle.effect,
+    .weather-fixed,
+    .flag-fixed,
+    #music-fab,
+    #wakatime-status {
+        -webkit-animation: none;
+        animation: none;
+        opacity: 1;
+        visibility: visible;
     }
 }
 

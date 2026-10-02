@@ -112,7 +112,7 @@
     var geoBusy = false;
 
     function useFallbackCity() {
-      body.innerHTML = '<div class="weather-loading">定位不可用，加载' + fallbackCity + '天气…</div>';
+      body.innerHTML = '<div class="weather-loading">加载' + fallbackCity + '天气…</div>';
       fetch('https://geocoding-api.open-meteo.com/v1/search?name=' + encodeURIComponent(fallbackCity) +
         '&count=1&language=zh')
         .then(function (r) { return r.json(); })
@@ -152,8 +152,10 @@
       locateBtn.addEventListener('click', useGeolocation);
     }
 
-    // Auto-try geolocation on load; denied/timeout/unavailable falls back automatically
-    useGeolocation();
+    // Do NOT prompt for geolocation on first visit: load the configured
+    // fallback city directly. Location is only requested when the user
+    // explicitly taps the locate button.
+    useFallbackCity();
   }
 
   /* ============================================================
@@ -185,8 +187,6 @@
   }
 
   function initBiliPlayer() {
-    var MUSIC_KEY = 'bili-music-on';
-
     var fab = document.getElementById('music-fab');
     var panel = document.getElementById('music-panel');
     var frame = document.getElementById('bili-frame');
@@ -205,7 +205,6 @@
     var endTimer = null;
     var created = false;
     var playing = false;
-    var gestureArmed = false;
 
     function curSong() { return songs[order[pos]]; }
 
@@ -253,7 +252,6 @@
       frame.src = 'https://player.bilibili.com/player.html?bvid=' + encodeURIComponent(song.bvid) +
         '&autoplay=1&danmaku=0&high_quality=1';
       setPlayingUI(true);
-      try { localStorage.setItem(MUSIC_KEY, '1'); } catch (e) {}
       scheduleEnd(song);
     }
 
@@ -261,7 +259,6 @@
       clearEndTimer();
       frame.src = 'about:blank';
       setPlayingUI(false);
-      try { localStorage.setItem(MUSIC_KEY, '0'); } catch (e) {}
     }
 
     function showEmpty() {
@@ -320,31 +317,6 @@
       if (playing) stop();
       else if (songs.length) playAt(pos);
     });
-
-    // Browsers block autoplay before first interaction: start on first gesture
-    function armGestureAutostart() {
-      if (gestureArmed) return;
-      gestureArmed = true;
-
-      var saved = null;
-      try { saved = localStorage.getItem(MUSIC_KEY); } catch (e) {}
-      if (saved === '0') return;
-
-      function onFirstGesture() {
-        document.removeEventListener('pointerdown', onFirstGesture, true);
-        document.removeEventListener('touchstart', onFirstGesture, true);
-        document.removeEventListener('click', onFirstGesture, true);
-        document.removeEventListener('keydown', onFirstGesture, true);
-        if (!created) createPlayer(true);
-      }
-      // capture phase: fires even if page internals stop propagation
-      document.addEventListener('pointerdown', onFirstGesture, true);
-      document.addEventListener('touchstart', onFirstGesture, true);
-      document.addEventListener('click', onFirstGesture, true);
-      document.addEventListener('keydown', onFirstGesture, true);
-    }
-
-    armGestureAutostart();
   }
 
   /* ============================================================
