@@ -1,21 +1,16 @@
 window.WAKATIME_WEEKLY = {
-  "updated_at": "2026-10-01T00:00:00.000Z",
+  "updated_at": "2026-10-02T04:40:41.928Z",
   "stats": {
     "total_hours": 0,
     "daily_avg": 0,
     "trend": "falling",
     "max_day": {
-      "date": "2026-10-01",
+      "date": "2026-10-02",
       "hours": 0,
       "text": "0 secs"
     }
   },
   "days": [
-    {
-      "date": "2026-09-25",
-      "hours": 0,
-      "text": "0 secs"
-    },
     {
       "date": "2026-09-26",
       "hours": 0,
@@ -45,12 +40,17 @@ window.WAKATIME_WEEKLY = {
       "date": "2026-10-01",
       "hours": 0,
       "text": "0 secs"
+    },
+    {
+      "date": "2026-10-02",
+      "hours": 0,
+      "text": "0 secs"
     }
   ],
   "ai": {
-    "title": "等待激活",
-    "quote": "配置 WakaTime 后，这里会显示你本周的编码能量报告。",
-    "tarot": "🌙 The Moon (等待)",
-    "theme_color": "#1a1a2e"
+    "title": "休养生息",
+    "quote": "代码写得少，Bug 自然少。这是某种程度上的绝对胜利。",
+    "tarot": "🛌 The Hermit (隐士)",
+    "theme_color": "#a0c4ff"
   }
 };
