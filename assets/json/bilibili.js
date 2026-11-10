@@ -1,6 +1,6 @@
 window.BILIBILI_SONGS = {
   "fid": 4207040106,
-  "updated_at": "2026-11-09T07:52:05.372Z",
+  "updated_at": "2026-11-10T08:17:13.683Z",
   "count": 1,
   "songs": [
     {
